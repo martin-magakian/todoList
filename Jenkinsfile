@@ -19,5 +19,13 @@ pipeline {
                 junit(testResults: '**/target/**/TEST*.xml', allowEmptyResults: true)
             }
         }
+	    post {
+	        failure {
+	            mail to: team@example.com, subject: 'The Pipeline failed :('
+	        }
+	    }
     }
 }
+
+
+
