@@ -12,7 +12,7 @@
 
 
 pipeline {
-    agent { 
+    agent { s
     	node { 
     		label 'java8'
     	}
