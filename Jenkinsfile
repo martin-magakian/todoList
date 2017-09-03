@@ -12,13 +12,10 @@
 
 
 pipeline {
-    agent { s
+    agent {
     	node { 
-    		label 'java8'
+    		label 'maven'
     	}
-    }
-    tools {
-    	maven 'maven 3.3.9'
     }
 
     stages {
