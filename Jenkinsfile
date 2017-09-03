@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Archive') {
             steps {
-                junit 'reports/**/*.xml'
+                junit(testResults: '**/target/**/TEST*.xml', allowEmptyResults: true)
             }
         }
     }
