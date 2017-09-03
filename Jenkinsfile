@@ -13,9 +13,7 @@
 
 pipeline {
     agent {
-    	node { 
-    		label 'any'
-    	}
+    	label any
     }
 
     stages {
