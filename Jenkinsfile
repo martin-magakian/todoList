@@ -1,25 +1,22 @@
-/*pipeline {
-    agent { docker 'maven:3.3.3' }
-    stages {
-        stage('build') {
-            steps {
-                sh 'mvn package'
-            }
-        }
-    }
-}*/
-
-
-
 pipeline {
     agent {
     	label any
     }
 
     stages {
+        stage('pre-build') {
+            steps {
+                sh 'echo "do stuff before build"'
+            }
+        }
         stage('build') {
             steps {
                 sh 'mvn package'
+            }
+        }
+        stage('Archive') {
+            steps {
+                junit 'reports/**/*.xml'
             }
         }
     }
