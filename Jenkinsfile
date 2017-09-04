@@ -1,6 +1,7 @@
 
 
 	pipeline {
+		def app
 	    agent {
 	    	agent { docker 'maven:3.3.3' }
 	    }
@@ -21,14 +22,7 @@
 	                junit(testResults: '**/target/**/TEST*.xml', allowEmptyResults: true)
 	            }
 	        }
-	        stage('Push') {
-	            steps {
-	                app = docker.build("getintodevops/hellonode")
-	                docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-			            app.push("latest")
-			        }
-	            }
-	        }
+
 		   //post {
 		   //    failure {
 		   //        mail to: team@example.com, subject: 'The Pipeline failed :('
