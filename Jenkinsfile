@@ -29,11 +29,11 @@
 			        }
 	            }
 	        }
-		    post {
-		        failure {
-		            mail to: team@example.com, subject: 'The Pipeline failed :('
-		        }
-		    }
+		   //post {
+		   //    failure {
+		   //        mail to: team@example.com, subject: 'The Pipeline failed :('
+		   //    }
+		   //}
 	    }
 	}
 
