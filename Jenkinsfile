@@ -27,18 +27,12 @@
 
 node {
      stage('pre-build') {
-         steps {
-             sh 'echo "do stuff before build"'
-         }
+        sh 'echo "do stuff before build"'
      }
      stage('build') {
-         steps {
-             sh 'mvn package'
-         }
+        sh 'mvn package'
      }
      stage('Archive') {
-         steps {
-             junit(testResults: '**/target/**/TEST*.xml', allowEmptyResults: true)
-         }
+        junit(testResults: '**/target/**/TEST*.xml', allowEmptyResults: true)
      }
 }
