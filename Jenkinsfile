@@ -15,7 +15,7 @@
 	        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
 	            app.push("latest")
 	        }
-	        sh 'docker run -d -p 8080:8080 martinmagakian/todolist'
+	        sh 'docker run -d -p 8081:8080 martinmagakian/todolist'
 	     }
 	}
 
