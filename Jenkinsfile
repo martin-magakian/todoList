@@ -42,4 +42,5 @@ node {
                  junit(testResults: '**/target/**/TEST*.xml', allowEmptyResults: true)
              }
          }
+    }
 }
