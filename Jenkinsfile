@@ -35,4 +35,10 @@ node {
      stage('Archive') {
         junit(testResults: '**/target/**/TEST*.xml', allowEmptyResults: true)
      }
+     stage('Docker') {
+        def app = docker.build("martinmagakian/todolist")
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+            app.push("latest")
+        }
+     }
 }
