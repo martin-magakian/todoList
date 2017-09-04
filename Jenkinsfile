@@ -1,6 +1,6 @@
 pipeline {	
     agent {
-    	agent { docker 'maven:3.3.3' }
+    	docker 'maven:3.3.3'
     }
 
     stages {
