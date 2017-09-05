@@ -9,7 +9,7 @@ node {
 	stage('test') {
 		sh 'java -version'
 		sh 'which java'
-		sh 'mvn test -X'
+		sh 'mvn package'
 		junit(testResults: '**/target/**/TEST*.xml', allowEmptyResults: true)
 	}
 	stage('build') {
