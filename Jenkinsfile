@@ -19,7 +19,7 @@ node {
 		try {
 			sh 'sleep 10 | false'
 			sh "echo coooooool"
-		} catch {
+		} catch(Exception ex) {
 			sh "echo arfffff"
 			img.stop()
 		}
