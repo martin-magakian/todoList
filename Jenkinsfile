@@ -3,7 +3,7 @@
 	node {
 		
 		stage('checkout') {
-			git "github.com/martin-magakian/todolist"
+			git "https://github.com/martin-magakian/todolist"
 			sh 'echo "do stuff before build"'
 		}
 		stage('test') {
