@@ -1,24 +1,32 @@
 
 
 	node {
-	     stage('pre-build') {
-	        sh 'echo "do stuff before build"'
-	     }
-	     stage('build') {
-	        sh 'mvn package' // unit test & build if success
-	     }
-	     stage('Archive') {
-	        junit(testResults: '**/target/**/TEST*.xml', allowEmptyResults: true)
-	     }
-	     stage('release') {
-	        def app = docker.build("martinmagakian/todolist")
-	        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-	            app.push("latest")
-	        }
-	     }
-	     stage('deploy') {
-	     	sh 'docker rm -f todolist | true'
-	        sh 'docker run -d --name todolist -p 8081:8080 martinmagakian/todolist'
-	     }
+		def app
+		stage('pre-build') {
+			sh 'echo "do stuff before build"'
+		}
+		stage('test') {
+			sh 'mvn test'
+			junit(testResults: '**/target/**/TEST*.xml', allowEmptyResults: true)
+		}
+		stage('build') {
+			sh 'mvn package -DskipTests'
+		}
+		stage('release (test)') {
+			app = docker.build("martinmagakian/todolist")
+			def img = docker.image('martinmagakian/todolist').run("-p 8888:8080")
+			sh 'sleep 1000'
+			img.stop()
+			//sh 'docker run -d --name todolist -p 8081:8080 martinmagakian/todolist'
+			//sh 'MVN TESSSSSSSSSSSSSSSSSSST'
+		}
+		stage('release') {
+			docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+				app.push("latest")
+			}
+		}
+		stage('deploy (preprod)') {
+
+		}
 	}
 
