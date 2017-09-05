@@ -18,14 +18,12 @@ node {
 		def img = docker.image('martinmagakian/todolist').run("-p 8888:8080")
 		try {
 			sh 'sleep 10 | false'
-			sh "echo coooooool"
-		} catch(Exception ex) {
-			sh "echo arfffff"
 			img.stop()
-		}
-		img.stop()
-		docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-			app.push("latest")
+			docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+				app.push("latest")
+			}
+		} catch(Exception ex) {
+			img.stop()
 		}
 	}
 	stage('deploy (preprod)') {
