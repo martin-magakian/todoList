@@ -2,11 +2,13 @@
 
 	node {
 		
-		stage('checkout') {
-			git "https://github.com/martin-magakian/todolist"
-			sh 'echo "do stuff before build"'
-		}
+		//stage('checkout') {
+		//	git "https://github.com/martin-magakian/todolist"
+		//	sh 'echo "do stuff before build"'
+		//}
 		stage('test') {
+			sh 'java -version'
+			sh 'which java'
 			sh 'mvn test'
 			junit(testResults: '**/target/**/TEST*.xml', allowEmptyResults: true)
 		}
