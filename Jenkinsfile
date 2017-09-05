@@ -1,8 +1,9 @@
 
 
 	node {
-		def app
-		stage('pre-build') {
+		
+		stage('checkout') {
+			git "github.com/martin-magakian/todolist"
 			sh 'echo "do stuff before build"'
 		}
 		stage('test') {
@@ -12,15 +13,11 @@
 		stage('build') {
 			sh 'mvn package -DskipTests'
 		}
-		stage('release (test)') {
-			app = docker.build("martinmagakian/todolist")
+		stage('release') {
+			def app = docker.build("martinmagakian/todolist")
 			def img = docker.image('martinmagakian/todolist').run("-p 8888:8080")
 			sh 'sleep 10'
 			img.stop()
-			//sh 'docker run -d --name todolist -p 8081:8080 martinmagakian/todolist'
-			//sh 'MVN TESSSSSSSSSSSSSSSSSSST'
-		}
-		stage('release') {
 			docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
 				app.push("latest")
 			}
