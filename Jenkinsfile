@@ -16,7 +16,7 @@ node {
 	stage('release') {
 		def app = docker.build("martinmagakian/todolist")
 		def img = docker.image('martinmagakian/todolist').run("-p 8888:8080")
-		sh 'sleep 10'
+		sh 'sleep 10 | false'
 		img.stop()
 		docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
 			app.push("latest")
