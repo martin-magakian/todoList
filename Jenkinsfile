@@ -15,7 +15,7 @@
 		stage('release (test)') {
 			app = docker.build("martinmagakian/todolist")
 			def img = docker.image('martinmagakian/todolist').run("-p 8888:8080")
-			sh 'sleep 1000'
+			sh 'sleep 10'
 			img.stop()
 			//sh 'docker run -d --name todolist -p 8081:8080 martinmagakian/todolist'
 			//sh 'MVN TESSSSSSSSSSSSSSSSSSST'
