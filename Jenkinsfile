@@ -24,6 +24,7 @@ node {
 			}
 		} catch(Exception ex) {
 			img.stop()
+			error('Fonctional test failed...')
 		}
 	}
 	stage('deploy (preprod)') {
