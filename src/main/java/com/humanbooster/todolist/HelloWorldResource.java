@@ -29,7 +29,7 @@ public class HelloWorldResource {
                 "<div>Add Task: <input id='taskTitle' type='text' name='taskTitle' /></div>" +
                 "<div>Due Date: <input id='taskDue' type='text' name='taskDue' /></div>" +
                 "<input id='submit' type='submit' />"+
-                "</form>";
+                "</form>plop";
     }
 
     @POST
