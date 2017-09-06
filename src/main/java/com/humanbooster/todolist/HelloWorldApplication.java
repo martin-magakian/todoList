@@ -1,4 +1,4 @@
-package com.humanbooster.test.todolist;
+package com.humanbooster.todolist;
 
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;

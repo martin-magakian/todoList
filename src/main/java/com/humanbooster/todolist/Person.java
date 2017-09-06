@@ -1,4 +1,4 @@
-package com.humanbooster.test.todolist;
+package com.humanbooster.todolist;
 
 /**
  * Created by sochipan on 02/09/17.

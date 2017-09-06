@@ -1,4 +1,4 @@
-package com.humanbooster.test.todolist;
+package com.humanbooster.todolist;
 
 import io.dropwizard.Configuration;
 import com.fasterxml.jackson.annotation.JsonProperty;

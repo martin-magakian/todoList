@@ -1,4 +1,4 @@
-package com.humanbooster.test.todolist;
+package com.humanbooster.todolist;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

@@ -1,6 +1,5 @@
 package com.humanbooster.test.test;
 
-import com.humanbooster.Bank;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
