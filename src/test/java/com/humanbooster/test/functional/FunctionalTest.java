@@ -38,6 +38,7 @@ public class FunctionalTest {
     @Test
     public void addRemoveTask() {
         driver.get("http://localhost:8080/");
+        System.out.println(driver.getPageSource());
         driver.findElement(By.id("taskTitle")).sendKeys("my task name");
         driver.findElement(By.id("taskDue")).sendKeys("22-07-2020");
         driver.findElement(By.id("submit")).click();
