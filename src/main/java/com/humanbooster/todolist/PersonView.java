@@ -3,14 +3,11 @@ package com.humanbooster.todolist;
 import io.dropwizard.views.View;
 
 public class PersonView extends View {
-    private final Person person;
+    private final Task task;
 
-    public PersonView(Person person) {
-        super("person.ftl");
-        this.person = person;
+    public PersonView(Task task) {
+        super("task.ftl");
+        this.task = task;
     }
 
-    public Person getPerson() {
-        return person;
-    }
 }

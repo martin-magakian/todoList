@@ -1,30 +1,56 @@
 package com.humanbooster.todolist;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
-@Path("/hello")
+@Path("/")
+@Produces(MediaType.TEXT_HTML)
 public class HelloWorldResource {
 
-    public HelloWorldResource() {
-    }
+    private List<Task> tasks = new ArrayList<Task>();
 
     @GET
-    @Path("/simple")
-    @Produces(MediaType.APPLICATION_JSON)
     public String sayHello() {
-        return "hello world";
+
+        String tasksHtml = "";
+        int i = 0;
+        for(Task task : tasks){
+            tasksHtml += "<div id='task_"+i+"'><a href='/view/"+i+"'>"+task.getTitle()+"</a> <a href='/delete/"+i+"'>X</a></div>";
+            i++;
+        }
+
+        return tasksHtml+
+                "<form action='/' method='POST'>" +
+                "<div>Add Task: <input id='taskTitle' type='text' name='taskTitle' /></div>" +
+                "<div>Due Date: <input id='taskDue' type='text' name='taskDue' /></div>" +
+                "<input id='submit' type='submit' />"+
+                "</form>";
+    }
+
+    @POST
+    public Response createTask(@FormParam("taskTitle") String taskTitle, @FormParam("taskDue") String taskDue) {
+        tasks.add(new Task(taskTitle, taskDue));
+        URI redirect = UriBuilder.fromUri("/").build();
+        return Response.seeOther(redirect).build();
     }
 
     @GET
-    @Produces(MediaType.TEXT_HTML)
-    @Path("/complex")
-    public PersonView sayHelloH1(@QueryParam("name") String name) {
-        return new PersonView(new Person(name));
+    @Path("/delete/{id}")
+    public Response delete(@PathParam("id") int id) {
+        tasks.remove(id);
+        URI redirect = UriBuilder.fromUri("/").build();
+        return Response.seeOther(redirect).build();
     }
 
-
+    @GET
+    @Path("/view/{id}")
+    public String view(@PathParam("id") int id) {
+        Task taskToDisplay = tasks.get(id);
+        return "Task:"+ taskToDisplay.getTitle()+" due date: "+taskToDisplay.getDueDate();
+    }
 }
