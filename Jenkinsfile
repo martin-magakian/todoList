@@ -14,7 +14,7 @@ node {
 	}
 	stage('release') {
 		def app = docker.build("martinmagakian/todolist")
-		def img = docker.image('martinmagakian/todolist').run("-p 8080:8080")
+		def img = docker.image('martinmagakian/todolist').run("-p 8081:8080")
 		try {
 			sh 'mvn -Dtest=FunctionalTest test'
 			img.stop()
