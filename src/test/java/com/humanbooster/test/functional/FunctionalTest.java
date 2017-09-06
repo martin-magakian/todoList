@@ -22,23 +22,20 @@ public class FunctionalTest {
 
     @Before
     public void setUp() throws Exception {
-
-        String os = System.getProperty("os.name")
-                .toLowerCase()
-                .split(" ")[0];
-        String pathDriver = Paths.get(".").toAbsolutePath().normalize().toString()+"/LIB/chromedriver-"+os;
+        String os = System.getProperty("os.name").toLowerCase().split(" ")[0];
+        String pathDriver = Paths.get(".").toAbsolutePath()
+                .normalize().toString()+"/LIB/chromedriver-"+os;
         System.setProperty("webdriver.chrome.driver", pathDriver);
 
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--headless");
+        chromeOptions.addArguments("--headless"); // no UI so it works on linux server
         driver = new ChromeDriver(chromeOptions);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
 
     @Test
     public void addRemoveTask() {
-        driver.get("http://localhost:8081/");
-        System.out.println(driver.getPageSource());
+        driver.get("http://localhost:8080/");
         driver.findElement(By.id("taskTitle")).sendKeys("my task name");
         driver.findElement(By.id("taskDue")).sendKeys("22-07-2020");
         driver.findElement(By.id("submit")).click();
@@ -55,5 +52,4 @@ public class FunctionalTest {
             assertTrue(true); // optional
         }
     }
-
 }
