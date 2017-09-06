@@ -1,6 +1,4 @@
-
 node {
-	
 	stage('checkout') {
 		git "https://github.com/martin-magakian/todolist"
 		sh 'echo "do stuff before build"'
@@ -14,7 +12,7 @@ node {
 	}
 	stage('release') {
 		def app = docker.build("martinmagakian/todolist")
-		def img = docker.image('martinmagakian/todolist').run("-p 8081:8080")
+		def img = docker.image('martinmagakian/todolist').run("-p 8080:8080")
 		try {
 			sh 'mvn -Dtest=FunctionalTest test'
 			img.stop()
@@ -31,8 +29,8 @@ node {
 		sh 'docker run -d --name todolist -p 80:8080 martinmagakian/todolist'
 	}
 	stage('deploy (prod)') {
-		// enable remote api http://vcommunique.blogspot.fr/2017/02/enabling-docker-remote-api-on-ubuntu.html
 		sh 'docker -H 46.101.172.45:2375 rm -f todolist | true'
+		sh 'docker -H 46.101.172.45:2375 pull martinmagakian/todolist'
 		sh 'docker -H 46.101.172.45:2375 run -d --name todolist -p 80:8080 martinmagakian/todolist'
 	}
 }
